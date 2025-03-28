@@ -24,7 +24,6 @@ import { ALL_PROJECTS } from '@/constants/projects';
 import { ALL_EXP } from '@/constants/experiences';
 import { useState, useEffect } from 'react';
 
-
 export default function Home() {
   const [folderSize, setFolderSize] = useState(3);
   const [velocity, setVelocity] = useState(0);
@@ -34,8 +33,6 @@ export default function Home() {
     PROFILE_IMAGES.SIDE,
     PROFILE_IMAGES.FORMAL,
   ];
-  
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -78,7 +75,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen w-full flex flex-col relative">
-      
       {/* Binary Animation Background */}
       <div className="fixed inset-0 z-0">
         <BinaryAnimation />
@@ -143,11 +139,10 @@ export default function Home() {
                   principles and user experience.
                 </p>
 
-                {/* CV Button */}
                 <div className="flex justify-center md:justify-start">
-                  <button className="px-8 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full hover:opacity-80 transition-all text-lg font-medium">
+                  <a href="/assets/Reyes_Mark_Andrei_CV.pdf" download="CV" className="px-8 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full hover:opacity-80 transition-all text-lg font-medium">
                     View my CV
-                  </button>
+                  </a>
                 </div>
               </div>
 
@@ -203,9 +198,9 @@ export default function Home() {
           <div className="pb-20 pt-10">
             <Masonry data={GALLERY_IMAGES} />
           </div>
-         
         </div>
       </div>
+
       <div className="relative w-full z-20 pt-10 bg-black">
         <div style={{ height: '100vh', position: 'relative', overflow: 'hidden'}}>
           <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
@@ -219,6 +214,7 @@ export default function Home() {
           />
         </div>
       </div>
+
       <div className="bg-[#ade87a] text-background z-10">
         <div className="pt-20">
           <ScrollVelocity
@@ -231,64 +227,65 @@ export default function Home() {
           <FlowingMenu />
         </div>
       </div>
-      <div className="relative z-20 p-10 bg-[#292926] min-h-screen flex flex-col justify-center">
-  <div className="container mx-auto px-4">
-    <div className="flex flex-col items-center justify-center space-y-10">
-      <p className="text-header font-serif text-center text-secondary"> Beyond & Belonging </p>
-      <p className="text-caption text-center text-white">
-        I am an active member of the Alliance of Computer Science UPLB, where I have gained valuable connections and hands-on experience through organizational work and academic opportunities like hackathons. I am also part of the UPLB Career Assistance Program Corp., which focuses on preparing students for the professional world through company setups and collaborations. Working with different companies has provided me with insights into various organizational missions and visions, enriching my learning experience.
-      </p>
-    </div>
-  </div>
 
-  <div className="flex gap-10 flex-wrap justify-center items-center p-10">
-    <TiltedCard
-      imageSrc={ORG_IMAGES.ACSS}
-      altText="ACSS - Alliance of Computer Science Student"
-      captionText="ACSS - Alliance of Computer Science Student"
-      containerHeight="300px"
-      containerWidth="300px"
-      imageHeight="300px"
-      imageWidth="300px"
-      rotateAmplitude={12}
-      scaleOnHover={1.2}
-      showMobileWarning={false}
-      showTooltip={true}
-      displayOverlayContent={true}
-    />
-    <TiltedCard
-      imageSrc={ORG_IMAGES.CAP}
-      altText="UPLB CAP - UPLB Career Assistance Program"
-      captionText="UPLB CAP - UPLB Career Assistance Program"
-      containerHeight="300px"
-      containerWidth="300px"
-      imageHeight="300px"
-      imageWidth="300px"
-      rotateAmplitude={12}
-      scaleOnHover={1.2}
-      showMobileWarning={false}
-      showTooltip={true}
-      displayOverlayContent={true}
-    />
-  </div>
-</div>
+      <div className="relative z-20 p-10 bg-[#292926] min-h-screen flex flex-col justify-center">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center justify-center space-y-10">
+            <p className="text-header font-serif text-center text-secondary"> Beyond & Belonging </p>
+            <p className="text-caption text-center text-white">
+              I am an active member of the Alliance of Computer Science UPLB, where I have gained valuable connections and hands-on experience through organizational work and academic opportunities like hackathons. I am also part of the UPLB Career Assistance Program Corp., which focuses on preparing students for the professional world through company setups and collaborations. Working with different companies has provided me with insights into various organizational missions and visions, enriching my learning experience.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex gap-10 flex-wrap justify-center items-center p-10">
+          <TiltedCard
+            imageSrc={ORG_IMAGES.ACSS}
+            altText="ACSS - Alliance of Computer Science Student"
+            captionText="ACSS - Alliance of Computer Science Student"
+            containerHeight="300px"
+            containerWidth="300px"
+            imageHeight="300px"
+            imageWidth="300px"
+            rotateAmplitude={12}
+            scaleOnHover={1.2}
+            showMobileWarning={false}
+            showTooltip={true}
+            displayOverlayContent={true}
+          />
+          <TiltedCard
+            imageSrc={ORG_IMAGES.CAP}
+            altText="UPLB CAP - UPLB Career Assistance Program"
+            captionText="UPLB CAP - UPLB Career Assistance Program"
+            containerHeight="300px"
+            containerWidth="300px"
+            imageHeight="300px"
+            imageWidth="300px"
+            rotateAmplitude={12}
+            scaleOnHover={1.2}
+            showMobileWarning={false}
+            showTooltip={true}
+            displayOverlayContent={true}
+          />
+        </div>
+      </div>
 
       <div className="relative z-20 bg-[#292926]">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-10">
             <p className="text-header font-serif text-center text-secondary"> Hands-On Learning </p>
-             <p className="text-caption text-center text-white"> I am a full-stack developer with hands-on experience in building innovative applications, optimizing systems, and managing workflows. I often take on the role of the leader in group projects, which has honed my ability to initiate and build projects from scratch. Beyond development, I have also taken leadership roles in business ventures and collaborated in hackathons to solve real-world problems.</p>
+            <p className="text-caption text-center text-white"> I am a full-stack developer with hands-on experience in building innovative applications, optimizing systems, and managing workflows. I often take on the role of the leader in group projects, which has honed my ability to initiate and build projects from scratch. Beyond development, I have also taken leadership roles in business ventures and collaborated in hackathons to solve real-world problems.</p>
           </div>
-          </div>
-            <div style={{ height: '600px', position: 'relative' }}>
-            <CircularGallery
-              items={circularItems}
-              bend={2.5}
-              textColor="#ade87a"
-              borderRadius={0.1}
-              font="bold 24px DM Sans"
-            />
-            </div>
+        </div>
+        <div style={{ height: '600px', position: 'relative' }}>
+          <CircularGallery
+            items={circularItems}
+            bend={2.5}
+            textColor="#ade87a"
+            borderRadius={0.1}
+            font="bold 24px DM Sans"
+          />
+        </div>
       </div>
 
       <Footer />
