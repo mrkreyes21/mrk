@@ -1,7 +1,3 @@
-/*
-	Installed from https://reactbits.dev/tailwind/
-*/
-
 import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 
@@ -21,11 +17,18 @@ function PixelTransition({
   const delayedCallRef = useRef(null);
 
   const [isActive, setIsActive] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-  const isTouchDevice =
-    'ontouchstart' in window ||
-    navigator.maxTouchPoints > 0 ||
-    window.matchMedia('(pointer: coarse)').matches;
+  // Only check for touch devices on the client-side
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const touchDevice =
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(pointer: coarse)').matches;
+      setIsTouchDevice(touchDevice);
+    }
+  }, []);
 
   useEffect(() => {
     const pixelGridEl = pixelGridRef.current;
