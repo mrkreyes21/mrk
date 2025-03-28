@@ -7,7 +7,7 @@ export const ALL_PROJECTS = [
     description: "Built a personal portfolio during my CMSC 128 project as frontend team leader, exploring UI/UX design and cool animations inspired by React Bits and other sources.",
     techStack: ["React", "NextJS", "JavaScript", "TailwindCss", "HTML/CSS"],
     year: "2025",
-    link: "https://mrkreyes21.github.io/mrkIT/"
+    link: "https://mrkit.vercel.app/"
   },
   {
     title: "MRKit (Version 1)",

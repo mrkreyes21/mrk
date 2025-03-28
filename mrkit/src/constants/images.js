@@ -1,7 +1,7 @@
 // Profile Images
 export const PROFILE_IMAGES = {
   HONGKONG: '/assets/mrk-hk.jpeg',
-  SIDE: '/assets/mrk-side.jpg',
+  SIDE: '/assets/mrk-side.JPG',
   FORMAL: '/assets/mrk-formal.JPG',
   AVATAR: '/assets/avatar.webp',
 };
@@ -42,7 +42,7 @@ export const GALLERY_IMAGES = [
   { id: 1, image: '/assets/life/camera.JPEG', height: 500 },
   { id: 2, image: '/assets/life/elyu.JPG', height: 400 },
   { id: 3, image: '/assets/life/falls.jpeg', height: 400 },
-  { id: 4, image: '/assets/life/food.JPEG', height: 400 },
+  { id: 4, image: '/assets/life/food.jpeg', height: 400 },
   { id: 5, image: '/assets/life/shadow.JPG', height: 300 },
   { id: 6, image: '/assets/life/street.JPG', height: 300 },
   { id: 7, image: '/assets/life/vigan1.jpeg', height: 400 },
