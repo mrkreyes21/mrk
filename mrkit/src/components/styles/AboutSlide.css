@@ -1,0 +1,43 @@
+.about-slide-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(90deg, #86efac, #4ade80);
+  padding: 0.75rem 0;
+}
+
+.about-slide {
+  display: flex;
+  width: fit-content;
+  animation: slide 30s linear infinite;
+  white-space: nowrap;
+}
+
+.slide-content {
+  color: #064e3b;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding-right: 2rem;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation on hover */
+.about-slide:hover {
+  animation-play-state: paused;
+}
+
+/* Make text more visible on dark mode */
+@media (prefers-color-scheme: dark) {
+  .slide-content {
+    color: #ecfdf5;
+  }
+} 
