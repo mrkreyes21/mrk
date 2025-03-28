@@ -37,7 +37,15 @@ const Navbar = () => {
     document.documentElement.classList.toggle('dark', newTheme);
   };
 
-  const isActive = (path) => pathname === path; // check if path is active
+  const isActive = (path) => pathname === path; 
+
+  const handleEmailPrompt = () => {
+    const email = "mmreyes22@up.edu.ph"; 
+    const subject = "Inquiry from MRK Website";
+    const body = "Hello, I would like to inquire about...";
+
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
 
   return (
     <nav className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${
@@ -86,19 +94,15 @@ const Navbar = () => {
 
           {/* Right Side Controls */}
           <div className="flex items-center space-x-2">
-            <Link 
-              href="#contact"
+            {/* Email Prompt */}
+            <button 
+              onClick={handleEmailPrompt}
               className={`relative px-4 py-2 rounded-full transition-all duration-300 flex items-center space-x-2
-                ${isActive('#contact') 
-                  ? 'text-primary dark:text-primary' 
-                  : 'text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary'}`}
+                text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary`}
             >
               <Mail className="w-5 h-5" />
               <span className="hidden md:inline">Contact</span>
-              {isActive('#contact') && (
-                <div className="absolute inset-0 bg-primary/10 dark:bg-primary/20 rounded-full -z-10" />
-              )}
-            </Link>
+            </button>
 
             {/* Theme Toggle */}
             <button 
