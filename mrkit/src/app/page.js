@@ -198,7 +198,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-10">
             <p className="text-header font-serif text-center text-secondary"> Life Beyond Screen </p>
-            <p className="text-caption text-center pl-20 pr-20 text-white"> Beyond academics, I am passionate about traveling and seeking new adventures. I love experiencing new things and capturing those moments through photography, where I get to practice my creativity through both taking and editing photos. I am also a huge music enthusiast — whether it's listening to my favorite songs or going to concerts, it is my way of having fun, jumping around, and momentarily forgetting about the demands of academics.</p>
+            <p className="text-caption text-center pl-20 pr-20 text-white"> Beyond academics, I am passionate about traveling and seeking new adventures. I love experiencing new things and capturing those moments through photography, where I get to practice my creativity through both taking and editing photos. I am also a huge music enthusiast — whether it is listening to my favorite songs or going to concerts, it is my way of having fun, jumping around, and momentarily forgetting about the demands of academics.</p>
           </div>
           <div className="pb-20 pt-10">
             <Masonry data={GALLERY_IMAGES} />
