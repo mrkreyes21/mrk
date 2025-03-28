@@ -55,14 +55,14 @@ export const ALL_PROJECTS = [
   {
     title: "Kunin Mo Siguro?",
     image: PROJECT_IMAGES.KUNIN_MO_SIGURO,
-    description: "It is a play-until-you-lose game where the goal is to gather as many points as possible to help in Sonnie Robredough's Angat Buhay Project.",
+    description: "It is a play-until-you-lose game where the goal is to gather as many points as possible to help in Sonnie Robredough Angat Buhay Project.",
     techStack: ["Java", "OOP"],
     year: "2023"
   },
   {
     title: "Farm2Market",
     image: PROJECT_IMAGES.FARM_2_MARKET,
-    description: "This is a farm simulation game. You'll play the role of a farmer in this game. You are given an initial amount of PHP. 5,000 pesos as a budget for your farm.",
+    description: "This is a farm simulation game. You will play the role of a farmer in this game. You are given an initial amount of PHP. 5,000 pesos as a budget for your farm.",
     techStack: ["Python"],
     year: "2022"
   }

@@ -18,14 +18,12 @@ import {
 import { 
   PROFILE_IMAGES, 
   GALLERY_IMAGES, 
-  BACKGROUND_IMAGES, 
   ORG_IMAGES
 } from '@/constants/images';
 import { ALL_PROJECTS } from '@/constants/projects';
 import { ALL_EXP } from '@/constants/experiences';
 import { useState, useEffect } from 'react';
 
-const BackgroundSVG = BACKGROUND_IMAGES.DOODLE;
 
 export default function Home() {
   const [folderSize, setFolderSize] = useState(3);
@@ -177,7 +175,7 @@ export default function Home() {
         <div className="container mx-auto flex items-center justify-center px-4 relative z-10">
           <div className="flex flex-col font-serif text-xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight md:leading-snug lg:leading-tight break-words text-white items-center justify-center text-center">
             <div className="flex items-center justify-center whitespace-pre-wrap">
-              Where do Mark's IT Journey Takes Shape?
+              Where do Mark&apos;s IT Journey Takes Shape?
             </div>
           </div>
         </div>
@@ -200,7 +198,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-10">
             <p className="text-header font-serif text-center text-secondary"> Life Beyond Screen </p>
-            <p className="text-caption text-center pl-20 pr-20 text-white"> Beyond academics, I'm passionate about traveling and seeking new adventures. I love experiencing new things and capturing those moments through photography, where I get to practice my creativity through both taking and editing photos. I'm also a huge music enthusiast — whether it's listening to my favorite songs or going to concerts, it's my way of having fun, jumping around, and momentarily forgetting about the demands of academics.</p>
+            <p className="text-caption text-center pl-20 pr-20 text-white"> Beyond academics, I am passionate about traveling and seeking new adventures. I love experiencing new things and capturing those moments through photography, where I get to practice my creativity through both taking and editing photos. I am also a huge music enthusiast — whether it's listening to my favorite songs or going to concerts, it is my way of having fun, jumping around, and momentarily forgetting about the demands of academics.</p>
           </div>
           <div className="pb-20 pt-10">
             <Masonry data={GALLERY_IMAGES} />
@@ -238,7 +236,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center space-y-10">
       <p className="text-header font-serif text-center text-secondary"> Beyond & Belonging </p>
       <p className="text-caption text-center text-white">
-        I am an active member of the Alliance of Computer Science UPLB, where I've gained valuable connections and hands-on experience through organizational work and academic opportunities like hackathons. I'm also part of the UPLB Career Assistance Program Corp., which focuses on preparing students for the professional world through company setups and collaborations. Working with different companies has provided me with insights into various organizational missions and visions, enriching my learning experience.
+        I am an active member of the Alliance of Computer Science UPLB, where I have gained valuable connections and hands-on experience through organizational work and academic opportunities like hackathons. I am also part of the UPLB Career Assistance Program Corp., which focuses on preparing students for the professional world through company setups and collaborations. Working with different companies has provided me with insights into various organizational missions and visions, enriching my learning experience.
       </p>
     </div>
   </div>
@@ -279,7 +277,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-10">
             <p className="text-header font-serif text-center text-secondary"> Hands-On Learning </p>
-             <p className="text-caption text-center text-white"> I'm a full-stack developer with hands-on experience in building innovative applications, optimizing systems, and managing workflows. I often take on the role of the leader in group projects, which has honed my ability to initiate and build projects from scratch. Beyond development, I've also taken leadership roles in business ventures and collaborated in hackathons to solve real-world problems.</p>
+             <p className="text-caption text-center text-white"> I am a full-stack developer with hands-on experience in building innovative applications, optimizing systems, and managing workflows. I often take on the role of the leader in group projects, which has honed my ability to initiate and build projects from scratch. Beyond development, I have also taken leadership roles in business ventures and collaborated in hackathons to solve real-world problems.</p>
           </div>
           </div>
             <div style={{ height: '600px', position: 'relative' }}>
