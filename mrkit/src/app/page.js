@@ -200,7 +200,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-10">
             <p className="text-header font-serif text-center text-secondary"> Life Beyond Screen </p>
-            <p className="text-caption text-center pl-20 pr-20 text-primary"> Beyond academics, I'm passionate about traveling and seeking new adventures. I love experiencing new things and capturing those moments through photography, where I get to practice my creativity through both taking and editing photos. I'm also a huge music enthusiast — whether it's listening to my favorite songs or going to concerts, it's my way of having fun, jumping around, and momentarily forgetting about the demands of academics.</p>
+            <p className="text-caption text-center pl-20 pr-20 text-white"> Beyond academics, I'm passionate about traveling and seeking new adventures. I love experiencing new things and capturing those moments through photography, where I get to practice my creativity through both taking and editing photos. I'm also a huge music enthusiast — whether it's listening to my favorite songs or going to concerts, it's my way of having fun, jumping around, and momentarily forgetting about the demands of academics.</p>
           </div>
           <div className="pb-20 pt-10">
             <Masonry data={GALLERY_IMAGES} />
@@ -237,7 +237,7 @@ export default function Home() {
   <div className="container mx-auto px-4">
     <div className="flex flex-col items-center justify-center space-y-10">
       <p className="text-header font-serif text-center text-secondary"> Beyond & Belonging </p>
-      <p className="text-caption text-center text-primary">
+      <p className="text-caption text-center text-white">
         I am an active member of the Alliance of Computer Science UPLB, where I've gained valuable connections and hands-on experience through organizational work and academic opportunities like hackathons. I'm also part of the UPLB Career Assistance Program Corp., which focuses on preparing students for the professional world through company setups and collaborations. Working with different companies has provided me with insights into various organizational missions and visions, enriching my learning experience.
       </p>
     </div>
@@ -279,7 +279,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-10">
             <p className="text-header font-serif text-center text-secondary"> Hands-On Learning </p>
-             <p className="text-caption text-center text-primary"> I'm a full-stack developer with hands-on experience in building innovative applications, optimizing systems, and managing workflows. I often take on the role of the leader in group projects, which has honed my ability to initiate and build projects from scratch. Beyond development, I've also taken leadership roles in business ventures and collaborated in hackathons to solve real-world problems.</p>
+             <p className="text-caption text-center text-white"> I'm a full-stack developer with hands-on experience in building innovative applications, optimizing systems, and managing workflows. I often take on the role of the leader in group projects, which has honed my ability to initiate and build projects from scratch. Beyond development, I've also taken leadership roles in business ventures and collaborated in hackathons to solve real-world problems.</p>
           </div>
           </div>
             <div style={{ height: '600px', position: 'relative' }}>
