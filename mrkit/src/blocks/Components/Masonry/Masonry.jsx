@@ -1,9 +1,5 @@
-/*
-	Installed from https://reactbits.dev/tailwind/
-*/
-
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { useTransition, a } from '@react-spring/web';
+import { motion } from 'framer-motion';
 
 function Masonry({ data }) {
   const [columns, setColumns] = useState(2);
@@ -52,27 +48,28 @@ function Masonry({ data }) {
     return [heights, gridItems];
   }, [columns, data, width]);
 
-  const transitions = useTransition(gridItems, {
-    keys: (item) => item.id,
-    from: ({ x, y, width, height }) => ({ x, y, width, height, opacity: 0 }),
-    enter: ({ x, y, width, height }) => ({ x, y, width, height, opacity: 1 }),
-    update: ({ x, y, width, height }) => ({ x, y, width, height }),
-    leave: { height: 0, opacity: 0 },
-    config: { mass: 5, tension: 500, friction: 100 },
-    trail: 25,
-  });
-
   return (
     <div
       ref={ref}
       className="relative w-full h-full"
       style={{ height: Math.max(...heights) }}
     >
-      {transitions((style, item) => (
-        <a.div
+      {gridItems.map((item) => (
+        <motion.div
           key={item.id}
-          style={style}
-          className="absolute p-[15px] [will-change:transform,width,height,opacity]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          style={{
+            position: 'absolute',
+            top: item.y,
+            left: item.x,
+            width: item.width,
+            height: item.height,
+            padding: '15px',
+            willChange: 'transform, opacity',
+          }}
         >
           <div
             className="relative w-full h-full overflow-hidden uppercase text-[10px] leading-[10px] rounded-[4px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] transition duration-300 ease hover:scale-110"
@@ -83,7 +80,7 @@ function Masonry({ data }) {
               backgroundPosition: 'center',
             }}
           />
-        </a.div>
+        </motion.div>
       ))}
     </div>
   );
