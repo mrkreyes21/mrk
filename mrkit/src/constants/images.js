@@ -66,7 +66,7 @@ export const EXP_IMAGES = {
   PARLIAMENT1: '/assets/experiences/parliament1.jpeg',
   PARLIAMENT2: '/assets/experiences/parliament2.jpeg',
   CROPCIRCLE: '/assets/experiences/cropcircle.JPG',
-  ELBI_CARE: '/assets/experiences/elbicare.JPG',
+  ELBI_CARE: '/assets/experiences/elbicare.jpg',
   HACKASTREET: '/assets/experiences/hack-a-street.JPEG',
   HACKASTREET1: '/assets/experiences/hack-a-street1.jpeg',
   HACKASTREET_PITCH: '/assets/experiences/hack-a-street-pitch.JPEG',
