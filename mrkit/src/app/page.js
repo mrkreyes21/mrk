@@ -1,20 +1,9 @@
 'use client';
-import {
-  CardAnimation,
-  TextLoop,
-  AboutSlide,
-  BinaryAnimation,
-  Aurora,
-  TiltedCard,
-  Masonry,
-  Folder,
-  CircularGallery,
-  ScrollVelocity,
-  FlowingMenu,
-  ImageTrail,
-  Footer,
-  Ballpit
-} from '@/components/components';
+import React, { useState, useEffect, useMemo } from 'react';
+import dynamic from 'next/dynamic';
+import _ from 'lodash';
+
+// Constants
 import { 
   PROFILE_IMAGES, 
   GALLERY_IMAGES, 
@@ -22,79 +11,149 @@ import {
 } from '@/constants/images';
 import { ALL_PROJECTS } from '@/constants/projects';
 import { ALL_EXP } from '@/constants/experiences';
-import { useState, useEffect } from 'react';
 
-export default function Home() {
+// Dynamic Imports with Suspense
+const BinaryAnimation = dynamic(() => import('@/components/components').then(mod => mod.BinaryAnimation), { 
+  ssr: false,
+  loading: () => <div className="bg-black w-full h-full" />
+});
+const Aurora = dynamic(() => import('@/components/components').then(mod => mod.Aurora), { 
+  ssr: false 
+});
+const CardAnimation = dynamic(() => import('@/components/components').then(mod => mod.CardAnimation), { 
+  ssr: false 
+});
+const TiltedCard = dynamic(() => import('@/components/components').then(mod => mod.TiltedCard), { 
+  ssr: false 
+});
+const TextLoop = dynamic(() => import('@/components/components').then(mod => mod.TextLoop), { 
+  ssr: false 
+});
+const AboutSlide = dynamic(() => import('@/components/components').then(mod => mod.AboutSlide), { 
+  ssr: false 
+});
+const Ballpit = dynamic(() => import('@/components/components').then(mod => mod.Ballpit), { 
+  ssr: false 
+});
+const Masonry = dynamic(() => import('@/components/components').then(mod => mod.Masonry), { 
+  ssr: false 
+});
+const ImageTrail = dynamic(() => import('@/components/components').then(mod => mod.ImageTrail), { 
+  ssr: false 
+});
+const ScrollVelocity = dynamic(() => import('@/components/components').then(mod => mod.ScrollVelocity), { 
+  ssr: false 
+});
+const FlowingMenu = dynamic(() => import('@/components/components').then(mod => mod.FlowingMenu), { 
+  ssr: false 
+});
+const CircularGallery = dynamic(() => import('@/components/components').then(mod => mod.CircularGallery), { 
+  ssr: false 
+});
+const Folder = dynamic(() => import('@/components/components').then(mod => mod.Folder), { 
+  ssr: false 
+});
+const Footer = dynamic(() => import('@/components/components').then(mod => mod.Footer), { 
+  ssr: false 
+});
+
+// Performance Hooks
+function useResponsiveSize() {
   const [folderSize, setFolderSize] = useState(3);
+
+  useEffect(() => {
+    const handleResize = _.throttle(() => {
+      setFolderSize(window.innerWidth >= 768 ? 3 : 2);
+    }, 200);
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      handleResize.cancel();
+    };
+  }, []);
+
+  return folderSize;
+}
+
+function useScrollVelocity() {
   const [velocity, setVelocity] = useState(0);
 
-  const folderItems = [
+  useEffect(() => {
+    const updateVelocity = _.throttle(() => {
+      const scrollY = window.scrollY;
+      const scrollDelta = Math.abs(scrollY - (updateVelocity.lastScrollY || 0));
+      const timeDelta = Date.now() - (updateVelocity.lastTime || 0);
+      
+      if (timeDelta > 0) {
+        setVelocity(scrollDelta / timeDelta);
+      }
+      
+      updateVelocity.lastScrollY = scrollY;
+      updateVelocity.lastTime = Date.now();
+    }, 100);
+
+    window.addEventListener('scroll', updateVelocity);
+    return () => {
+      window.removeEventListener('scroll', updateVelocity);
+      updateVelocity.cancel();
+    };
+  }, []);
+
+  return velocity;
+}
+
+export default function Home() {
+  // Performance-optimized hooks
+  const folderSize = useResponsiveSize();
+  const velocity = useScrollVelocity();
+
+  // Memoized items to prevent unnecessary re-renders
+  const folderItems = useMemo(() => [
     PROFILE_IMAGES.HONGKONG,
     PROFILE_IMAGES.SIDE,
     PROFILE_IMAGES.FORMAL,
-  ];
+  ], []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setFolderSize(window.innerWidth >= 768 ? 3 : 2);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let lastTime = Date.now();
-
-    const updateVelocity = () => {
-      const currentScrollY = window.scrollY;
-      const currentTime = Date.now();
-      const timeDiff = currentTime - lastTime;
-      const scrollDiff = currentScrollY - lastScrollY;
-      
-      if (timeDiff > 0) {
-        setVelocity(scrollDiff / timeDiff);
-      }
-      
-      lastScrollY = currentScrollY;
-      lastTime = currentTime;
-    };
-
-    window.addEventListener('scroll', updateVelocity);
-    return () => window.removeEventListener('scroll', updateVelocity);
-  }, []);
-
-  const circularItems = ALL_EXP.map(project => ({
-    text: project.title,
-    image: project.image
-  }));
+  const circularItems = useMemo(() => 
+    ALL_EXP.map(project => ({
+      text: project.title,
+      image: project.image
+    })), 
+    [ALL_EXP]
+  );
 
   return (
     <div className="min-h-screen w-full flex flex-col relative">
-      {/* Binary Animation Background */}
-      <div className="fixed inset-0 z-0">
-        <BinaryAnimation />
-        <Aurora
-          colorStops={["#292926", "#ade87a", "#fff"]}
-          blend={0.5}
-          amplitude={1.0}
-          speed={0.5}
-        />
+      {/* Performance-optimized background */}
+      <div className="fixed inset-0 z-0 will-change-transform">
+        <React.Suspense fallback={<div className="bg-black w-full h-full" />}>
+          <BinaryAnimation />
+          <Aurora
+            colorStops={["#292926", "#ade87a", "#fff"]}
+            blend={0.5}
+            amplitude={1.0}
+            speed={0.5}
+          />
+        </React.Suspense>
       </div>
 
       {/* Card Animation */}
-      <div className="absolute inset-0 w-full h-full z-20 pointer-events-none">
-        <CardAnimation />
+      <div className="absolute inset-0 w-full h-full z-20 pointer-events-none will-change-transform">
+        <React.Suspense fallback={null}>
+          <CardAnimation />
+        </React.Suspense>
       </div>
 
       {/* Content Container */}
       <div className="relative z-10">
+        {/* Text Loop Section */}
         <div className="w-full h-screen flex flex-col justify-end py-4">
-          <TextLoop />
+          <React.Suspense fallback={null}>
+            <TextLoop />
+          </React.Suspense>
         </div>
 
         {/* Details Container */}
@@ -146,25 +205,33 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Folder Component on the Right */}
+              {/* Folder Component */}
               <div className="md:col-span-5 order-1 md:order-2 flex items-center justify-center">
-                <Folder 
-                  size={folderSize} 
-                  color="#ade87a" 
-                  items={folderItems}
-                  className="custom-folder" 
-                />
+                <React.Suspense fallback={null}>
+                  <Folder 
+                    size={folderSize} 
+                    color="#ade87a" 
+                    items={folderItems}
+                    className="custom-folder" 
+                  />
+                </React.Suspense>
               </div>
             </div>
           </div>
         </div>
       </div>
       
-      <AboutSlide />
+      {/* About Slide */}
+      <React.Suspense fallback={null}>
+        <AboutSlide />
+      </React.Suspense>
+
+      {/* Ballpit Section */}
       <div className="relative z-20 pt-10 sm:pt-12 md:pt-16 lg:pt-20 pb-20 sm:pb-30 md:pb-40 lg:pb-60 bg-black overflow-hidden">
-        {/* Ballpit Background */}
         <div className="absolute inset-0 z-0">
-          <Ballpit />
+          <React.Suspense fallback={null}>
+            <Ballpit />
+          </React.Suspense>
         </div>
         
         <div className="container mx-auto flex items-center justify-center px-4 relative z-10">
@@ -182,25 +249,29 @@ export default function Home() {
             preserveAspectRatio="none"
             fill="#292926"
           >
-            <path
-              d="M0,100 C480,0 960,0 1440,100"
-            />
+            <path d="M0,100 C480,0 960,0 1440,100" />
           </svg>
         </div>
       </div>
 
+      {/* Gallery Section */}
       <div className="relative z-20 pt-10 bg-[#292926]">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-10">
             <p className="text-header font-serif text-center text-secondary"> Life Beyond Screen </p>
-            <p className="text-caption text-center pl-20 pr-20 text-white"> Beyond academics, I am passionate about traveling and seeking new adventures. I love experiencing new things and capturing those moments through photography, where I get to practice my creativity through both taking and editing photos. I am also a huge music enthusiast — whether it is listening to my favorite songs or going to concerts, it is my way of having fun, jumping around, and momentarily forgetting about the demands of academics.</p>
+            <p className="text-caption text-center pl-20 pr-20 text-white"> 
+              Beyond academics, I am passionate about traveling and seeking new adventures. I love experiencing new things and capturing those moments through photography, where I get to practice my creativity through both taking and editing photos. I am also a huge music enthusiast — whether it is listening to my favorite songs or going to concerts, it is my way of having fun, jumping around, and momentarily forgetting about the demands of academics.
+            </p>
           </div>
           <div className="pb-20 pt-10">
-            <Masonry data={GALLERY_IMAGES} />
+            <React.Suspense fallback={null}>
+              <Masonry data={GALLERY_IMAGES} />
+            </React.Suspense>
           </div>
         </div>
       </div>
 
+      {/* Projects Section */}
       <div className="relative w-full z-20 pt-10 bg-black">
         <div style={{ height: '100vh', position: 'relative', overflow: 'hidden'}}>
           <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
@@ -208,26 +279,34 @@ export default function Home() {
               Projects?
             </h2>
           </div>
-          <ImageTrail
-            items={ALL_PROJECTS}
-            variant={7}
-          />
+          <React.Suspense fallback={null}>
+            <ImageTrail
+              items={ALL_PROJECTS}
+              variant={7}
+            />
+          </React.Suspense>
         </div>
       </div>
 
+      {/* Scroll Velocity Section */}
       <div className="bg-[#ade87a] text-background z-10">
         <div className="pt-20">
-          <ScrollVelocity
-            texts={['What Do I Use?', 'Let\'s Know More About Me']} 
-            velocity={velocity} 
-            className="custom-scroll-text"
-          />
+          <React.Suspense fallback={null}>
+            <ScrollVelocity
+              texts={['What Do I Use?', 'Let\'s Know More About Me']} 
+              velocity={velocity} 
+              className="custom-scroll-text"
+            />
+          </React.Suspense>
         </div>
         <div className="h-screen relative">
-          <FlowingMenu />
+          <React.Suspense fallback={null}>
+            <FlowingMenu />
+          </React.Suspense>
         </div>
       </div>
 
+      {/* Organizations Section */}
       <div className="relative z-20 p-10 bg-[#292926] min-h-screen flex flex-col justify-center">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-10">
@@ -270,25 +349,41 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Circular Gallery Section */}
       <div className="relative z-20 bg-[#292926]">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-10">
             <p className="text-header font-serif text-center text-secondary"> Hands-On Learning </p>
-            <p className="text-caption text-center text-white"> I am a full-stack developer with hands-on experience in building innovative applications, optimizing systems, and managing workflows. I often take on the role of the leader in group projects, which has honed my ability to initiate and build projects from scratch. Beyond development, I have also taken leadership roles in business ventures and collaborated in hackathons to solve real-world problems.</p>
+            <p className="text-caption text-center text-white"> 
+              I am a full-stack developer with hands-on experience in building innovative applications, optimizing systems, and managing workflows. I often take on the role of the leader in group projects, which has honed my ability to initiate and build projects from scratch. Beyond development, I have also taken leadership roles in business ventures and collaborated in hackathons to solve real-world problems.
+            </p>
           </div>
         </div>
         <div style={{ height: '600px', position: 'relative' }}>
-          <CircularGallery
-            items={circularItems}
-            bend={2.5}
-            textColor="#ade87a"
-            borderRadius={0.1}
-            font="bold 24px DM Sans"
-          />
+          <React.Suspense fallback={null}>
+            <CircularGallery
+              items={circularItems}
+              bend={2.5}
+              textColor="#ade87a"
+              borderRadius={0.1}
+              font="bold 24px DM Sans"
+            />
+          </React.Suspense>
         </div>
       </div>
 
-      <Footer />
+      {/* Footer */}
+      <React.Suspense fallback={null}>
+        <Footer />
+      </React.Suspense>
+
+      {/* Performance optimization styles */}
+      <style jsx global>{`
+        .will-change-transform {
+          will-change: transform;
+          transform: translateZ(0);
+        }
+      `}</style>
     </div>
   );
 }
